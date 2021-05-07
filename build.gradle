@@ -1,0 +1,28 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+apply plugin: 'java'
+
+group = 'fr.vinetos'
+version = '1.16-SNAPSHOT'
+
+sourceCompatibility = '1.11'
+targetCompatibility = '1.11'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+}
+
+dependencies {
+    implementation 'net.md-5:bungeecord-api:1.16-R0.2'
+    implementation 'junit:junit:4.13.2'
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        filter ReplaceTokens, tokens: [version: version]
+    }
+}
