@@ -19,15 +19,19 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
-public class PlayerMock implements ProxiedPlayer {
+public class MockPlayer implements ProxiedPlayer {
 
+    private final MockServer server;
+    private final UUID uuid;
     private String displayName;
 
-    public PlayerMock(ServerMock server, String name) {
+    public MockPlayer(MockServer server, String name) {
         this(server, name, UUID.randomUUID());
     }
 
-    public PlayerMock(ServerMock server, String name, UUID uuid) {
+    public MockPlayer(MockServer server, String name, UUID uuid) {
+        this.uuid = uuid;
+        this.server = server;
         setDisplayName(name);
     }
 

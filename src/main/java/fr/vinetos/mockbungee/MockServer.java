@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-public class ServerMock extends ProxyServer {
+public class MockServer extends ProxyServer {
 
     @Override
     public String getName() {
