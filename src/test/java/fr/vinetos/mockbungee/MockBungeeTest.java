@@ -4,24 +4,27 @@
 package fr.vinetos.mockbungee;
 
 import net.md_5.bungee.api.ProxyServer;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 
-public class MockBungeeTest {
+class MockBungeeTest {
 
-    @After
+    @AfterEach
     public void tearDown() {
-        if (MockBungee.isMocked())
-            MockBungee.unmock();
+        MockBungee.reset();
     }
 
     @Test
-    public void testServerMock() {
+    void testServerMock() {
         MockBungee.mock();
-        Assert.assertNotNull(ProxyServer.getInstance());
+        Assertions.assertNotNull(ProxyServer.getInstance());
         MockBungee.unmock();
-        Assert.assertNull(ProxyServer.getInstance());
+        Assertions.assertNull(ProxyServer.getInstance());
+    }
+
+    @Test
+    void loadPlugin() {
+        MockBungee.mock();
+        MockBungee.load(TestPlugin.class);
     }
 
 }
