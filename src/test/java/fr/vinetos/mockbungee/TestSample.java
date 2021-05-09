@@ -25,7 +25,7 @@ class TestSample {
     }
 
     @AfterAll
-    void tearDown() {
+    static void tearDown() {
         if (MockBungee.isMocked())
             MockBungee.unmock();
     }
