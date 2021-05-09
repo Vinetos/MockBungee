@@ -10,25 +10,25 @@ import java.lang.reflect.Field;
 
 public final class MockBungee {
 
-    private static ServerMock mock = null;
+    private static MockServer mock = null;
 
     /**
      * Prepare and mock a Bungeecord server
      *
-     * @return the {@link ServerMock} ready to be used in tests.
+     * @return the {@link MockServer} ready to be used in tests.
      */
-    public static ServerMock mock() {
-        return mock(new ServerMock());
+    public static MockServer mock() {
+        return mock(new MockServer());
     }
 
     /**
      * Prepare and mock a custom Bungeecord mocked server implementation
      *
      * @param <T>        The mock implementation to use.
-     * @param serverMock a custom {@link ServerMock} implementation.
-     * @return The provided {@link ServerMock}.
+     * @param serverMock a custom {@link MockServer} implementation.
+     * @return The provided {@link MockServer}.
      */
-    public static <T extends ServerMock> T mock(T serverMock) {
+    public static <T extends MockServer> T mock(T serverMock) {
         if (mock != null)
             throw new IllegalStateException("The server is already mocked");
 
@@ -41,9 +41,9 @@ public final class MockBungee {
     /**
      * Get the mock server instance.
      *
-     * @return The {@link ServerMock} instance or <code>null</code> if none is set up yet.
+     * @return The {@link MockServer} instance or <code>null</code> if none is set up yet.
      */
-    public static ServerMock getMock() {
+    public static MockServer getMock() {
         return mock;
     }
 
@@ -76,14 +76,30 @@ public final class MockBungee {
      *
      * @return a mocked server ready to be used in tests.
      */
-    public static ServerMock unmock() {
+    public static MockServer unmock() {
         mock.stop();
         setServerInstanceToNull();
-        return null;
+        return mock;
+    }
+
+    /**
+     * Internal method to reset MockBungee
+     */
+    static void reset() {
+        if (mock == null)
+            throw new IllegalStateException("MockBungee is already reset");
+        if (MockBungee.isMocked())
+            unmock();
+        mock = null;
     }
 
     public static Plugin load(Class<? extends Plugin> testPluginClass) {
         // TODO: 07/05/2021 Load a class
-        return null;
+        throw new UnimplementedOperationException();
+    }
+
+    public static void unload(Class<? extends Plugin> testPluginClass) {
+        // TODO: 07/05/2021 Unload a class
+        throw new UnimplementedOperationException();
     }
 }
