@@ -10,7 +10,7 @@ import org.junit.jupiter.api.*;
 class MockBungeeTest {
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         MockBungee.reset();
     }
 
