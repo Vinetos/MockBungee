@@ -1,13 +1,18 @@
 package fr.vinetos.mockbungee;
 
+import fr.vinetos.mockbungee.plugin.MockPlugin;
+import fr.vinetos.mockbungee.plugin.MockPluginDescription;
 import net.md_5.bungee.api.plugin.Listener;
-import net.md_5.bungee.api.plugin.Plugin;
 
-public class TestPlugin extends Plugin implements Listener {
+public class TestPlugin extends MockPlugin implements Listener {
 
     private boolean isLoaded = false;
     private boolean isEnabled = false;
     private boolean isDisabled = false;
+
+    public TestPlugin(MockPluginDescription description) {
+        super(description);
+    }
 
     @Override
     public void onLoad() {
@@ -40,5 +45,10 @@ public class TestPlugin extends Plugin implements Listener {
 
     public boolean isDisabled() {
         return isDisabled;
+    }
+
+    @Override
+    public MockPluginDescription getDescription() {
+        return super.getDescription();
     }
 }
