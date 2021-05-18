@@ -3,6 +3,8 @@
  */
 package fr.vinetos.mockbungee;
 
+import fr.vinetos.mockbungee.plugin.MockPlugin;
+import fr.vinetos.mockbungee.plugin.MockPluginDescription;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -93,13 +95,21 @@ public final class MockBungee {
         mock = null;
     }
 
-    public static Plugin load(Class<? extends Plugin> testPluginClass) {
-        // TODO: 07/05/2021 Load a class
-        throw new UnimplementedOperationException();
+    public static MockPlugin load(MockPluginDescription description) {
+        if (mock == null)
+            throw new IllegalStateException("Server isn't mocked");
+        return mock.getPluginManagerMock().create(description);
     }
 
-    public static void unload(Class<? extends Plugin> testPluginClass) {
-        // TODO: 07/05/2021 Unload a class
-        throw new UnimplementedOperationException();
+    public static MockPlugin load(MockPlugin mockPlugin) {
+        if (mock == null)
+            throw new IllegalStateException("Server isn't mocked");
+        return mock.getPluginManagerMock().load(mockPlugin);
+    }
+
+    public static void unload(MockPlugin mockPlugin) {
+        if (mock == null)
+            throw new IllegalStateException("Server isn't mocked");
+        mock.getPluginManagerMock().unload(mockPlugin);
     }
 }

@@ -3,6 +3,7 @@
  */
 package fr.vinetos.mockbungee;
 
+import fr.vinetos.mockbungee.plugin.PluginManagerMock;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.config.ConfigurationAdapter;
@@ -20,6 +21,8 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 public class MockServer extends ProxyServer {
+
+    private final PluginManagerMock pluginManagerMock = new PluginManagerMock();
 
     @Override
     public String getName() {
@@ -68,7 +71,11 @@ public class MockServer extends ProxyServer {
 
     @Override
     public PluginManager getPluginManager() {
-        throw new UnimplementedOperationException();
+        throw new UnimplementedOperationException("Do not use getPluginManager. Use getPluginManagerMock instead.");
+    }
+
+    public PluginManagerMock getPluginManagerMock() {
+        return pluginManagerMock;
     }
 
     @Override
