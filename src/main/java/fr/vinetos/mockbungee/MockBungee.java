@@ -85,9 +85,9 @@ public final class MockBungee {
     }
 
     /**
-     * Internal method to reset MockBungee
+     * Reset mock bungee
      */
-    static void reset() {
+    public static void reset() {
         if (mock == null)
             throw new IllegalStateException("MockBungee is already reset");
         if (MockBungee.isMocked())

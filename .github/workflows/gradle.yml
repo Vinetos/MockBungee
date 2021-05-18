@@ -20,8 +20,8 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build
-      
+      run: ./gradlew build --info
+
   test:
 
     runs-on: ubuntu-latest
@@ -37,4 +37,4 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Test with Gradle
-      run: ./gradlew test
+      run: ./gradlew test --info
