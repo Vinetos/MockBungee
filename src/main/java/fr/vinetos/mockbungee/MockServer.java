@@ -22,7 +22,6 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 public class MockServer extends ProxyServer {
-    public static final String VERSION = "";
 
     private final PluginManagerMock pluginManagerMock = new PluginManagerMock();
 
@@ -33,7 +32,7 @@ public class MockServer extends ProxyServer {
 
     @Override
     public String getVersion() {
-        return VERSION;
+        return MockBungee.getVersion();
     }
 
     @Override
