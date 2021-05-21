@@ -23,7 +23,6 @@ class TestSample {
         Assertions.assertFalse(plugin.isLoaded());
         Assertions.assertFalse(plugin.isEnabled());
         Assertions.assertTrue(plugin.isDisabled());
-        MockBungee.reset();
     }
 
     @AfterAll
