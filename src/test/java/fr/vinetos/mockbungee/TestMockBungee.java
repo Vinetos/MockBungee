@@ -3,7 +3,9 @@
  */
 package fr.vinetos.mockbungee;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import fr.vinetos.mockbungee.plugin.MockPluginDescription;
 import net.md_5.bungee.api.ProxyServer;
@@ -26,15 +28,15 @@ class TestMockBungee {
     @Test
     void testServerMock() {
         assertNotNull(ProxyServer.getInstance());
-        Assertions.assertEquals(mockServer, ProxyServer.getInstance());
+        assertEquals(mockServer, ProxyServer.getInstance());
         MockBungee.unmock();
-        Assertions.assertNull(ProxyServer.getInstance());
+        assertNull(ProxyServer.getInstance());
     }
 
     @Test
     void testLoadPlugin() {
         MockBungee.load(new MockPluginDescription.Builder().build());
-        Assertions.assertEquals(1, MockBungee.getMock().getPluginManagerMock().getPlugins().size());
+        assertEquals(1, MockBungee.getMock().getPluginManagerMock().getPlugins().size());
     }
 
     @Test
