@@ -5,13 +5,26 @@ package fr.vinetos.mockbungee;
 
 import fr.vinetos.mockbungee.plugin.MockPlugin;
 import fr.vinetos.mockbungee.plugin.MockPluginDescription;
+import java.io.IOException;
+import java.util.Properties;
 import net.md_5.bungee.api.ProxyServer;
 
 import java.lang.reflect.Field;
 
 public final class MockBungee {
-
+    private static final Properties PROPERTIES;
+    private static final String VERSION;
     private static MockServer mock = null;
+
+    static {
+        PROPERTIES = new Properties();
+        try {
+            PROPERTIES.load(MockBungee.class.getClassLoader().getResourceAsStream("config.properties"));
+            VERSION = (String) PROPERTIES.get("version");
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 
     /**
      * Prepare and mock a Bungeecord server
@@ -116,5 +129,9 @@ public final class MockBungee {
         if (mock == null)
             throw new IllegalStateException("Server isn't mocked");
         mock.getPluginManagerMock().unload(mockPlugin);
+    }
+
+    public static String getVersion() {
+        return VERSION;
     }
 }
