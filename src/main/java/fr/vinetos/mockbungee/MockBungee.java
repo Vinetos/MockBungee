@@ -6,7 +6,6 @@ package fr.vinetos.mockbungee;
 import fr.vinetos.mockbungee.plugin.MockPlugin;
 import fr.vinetos.mockbungee.plugin.MockPluginDescription;
 import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.plugin.Plugin;
 
 import java.lang.reflect.Field;
 
@@ -95,18 +94,35 @@ public final class MockBungee {
         mock = null;
     }
 
+    /**
+     * Load a {@link MockPluginDescription} in the mocked server
+     *
+     * @param description the description of a plugin
+     * @return the loaded plugin
+     */
     public static MockPlugin load(MockPluginDescription description) {
         if (mock == null)
             throw new IllegalStateException("Server isn't mocked");
         return mock.getPluginManagerMock().create(description);
     }
 
+    /**
+     * Load a {@link MockPlugin} in the mocked server
+     *
+     * @param mockPlugin the plugin to load
+     * @return the loaded plugin
+     */
     public static MockPlugin load(MockPlugin mockPlugin) {
         if (mock == null)
             throw new IllegalStateException("Server isn't mocked");
         return mock.getPluginManagerMock().load(mockPlugin);
     }
 
+    /**
+     * Remove a plugin from the mocked server
+     *
+     * @param mockPlugin the pluign to unload
+     */
     public static void unload(MockPlugin mockPlugin) {
         if (mock == null)
             throw new IllegalStateException("Server isn't mocked");
