@@ -3,6 +3,7 @@
  */
 package fr.vinetos.mockbungee;
 
+import fr.vinetos.mockbungee.exceptions.UnimplementedOperationException;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.config.ServerInfo;
