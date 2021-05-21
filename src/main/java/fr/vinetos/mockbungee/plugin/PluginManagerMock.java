@@ -16,7 +16,7 @@ public class PluginManagerMock {
         return load(new MockPlugin(plDesc));
     }
 
-    public MockPlugin load(MockPlugin plugin) {
+    public <E extends MockPlugin> E load(E plugin) {
         if (plugins.containsKey(plugin.getDescription().getName()))
             throw new IllegalStateException("Plugin with that name already initialized");
         plugins.put(plugin.getDescription().getName(), plugin);

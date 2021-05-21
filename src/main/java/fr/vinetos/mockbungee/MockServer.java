@@ -3,6 +3,7 @@
  */
 package fr.vinetos.mockbungee;
 
+import fr.vinetos.mockbungee.exceptions.UnimplementedOperationException;
 import fr.vinetos.mockbungee.plugin.PluginManagerMock;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -21,17 +22,18 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 public class MockServer extends ProxyServer {
+    public static final String VERSION = "";
 
     private final PluginManagerMock pluginManagerMock = new PluginManagerMock();
 
     @Override
     public String getName() {
-        throw new UnimplementedOperationException();
+        return "MockBungee";
     }
 
     @Override
     public String getVersion() {
-        throw new UnimplementedOperationException();
+        return VERSION;
     }
 
     @Override

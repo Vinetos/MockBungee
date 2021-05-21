@@ -67,31 +67,20 @@ public final class MockBungee {
             Field server = ProxyServer.class.getDeclaredField("instance");
             server.setAccessible(true);
             server.set(null, null);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
+            mock = null;
+        } catch (NoSuchFieldException | IllegalAccessException ex) {
+            throw new RuntimeException(ex);
         }
     }
 
     /**
-     * Unmock and clean the server
-     *
-     * @return a mocked server ready to be used in tests.
+     * Unmock and clean the server if a mock exist
      */
-    public static MockServer unmock() {
+    public static void unmock() {
+        if (mock == null)
+            return;
         mock.stop();
         setServerInstanceToNull();
-        return mock;
-    }
-
-    /**
-     * Reset mock bungee
-     */
-    public static void reset() {
-        if (mock == null)
-            throw new IllegalStateException("MockBungee is already reset");
-        if (MockBungee.isMocked())
-            unmock();
-        mock = null;
     }
 
     /**
@@ -112,7 +101,7 @@ public final class MockBungee {
      * @param mockPlugin the plugin to load
      * @return the loaded plugin
      */
-    public static MockPlugin load(MockPlugin mockPlugin) {
+    public static <E extends MockPlugin> E load(E mockPlugin) {
         if (mock == null)
             throw new IllegalStateException("Server isn't mocked");
         return mock.getPluginManagerMock().load(mockPlugin);
@@ -121,7 +110,7 @@ public final class MockBungee {
     /**
      * Remove a plugin from the mocked server
      *
-     * @param mockPlugin the pluign to unload
+     * @param mockPlugin the plugin to unload
      */
     public static void unload(MockPlugin mockPlugin) {
         if (mock == null)
