@@ -21,6 +21,7 @@ class MockBungeeTest {
         Assertions.assertEquals(mocked, ProxyServer.getInstance());
         MockBungee.unmock();
         Assertions.assertNull(ProxyServer.getInstance());
+        MockBungee.reset();
     }
 
     @Test
@@ -28,6 +29,7 @@ class MockBungeeTest {
         MockBungee.mock();
         MockBungee.load(new MockPluginDescription.Builder().build());
         Assertions.assertEquals(1, MockBungee.getMock().getPluginManagerMock().getPlugins().size());
+        MockBungee.reset();
     }
 
 }
